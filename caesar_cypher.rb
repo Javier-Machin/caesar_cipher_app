@@ -3,6 +3,7 @@ require "sinatra/reloader" if development?
   
 class CaesarCypher
 
+  #Generates interface text
   def self.create_message(params)
     if params["string"] != nil
       message = "The encoded phrase is: " + 
@@ -12,6 +13,7 @@ class CaesarCypher
     end 
   end
 
+  #Cypher logic
   def self.encode(string, shift)
   	string = string.split("").map do |char|
 	    if (97..122).include?(char.ord) 
@@ -47,7 +49,7 @@ class CaesarCypher
 
 end
 
-
+#Sends data to the view 
 get '/' do
   message = CaesarCypher.create_message(params)
   erb :index, :locals => {:message => message} 
